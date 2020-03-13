@@ -22,6 +22,7 @@ public class TwitterStateless {
         String input = args[1];
         OAuthAuthorization auth = ConfigUtils.getAuthorizationFromFileProperties(propertiesFile);
 
+
         SparkConf conf = new SparkConf().setAppName("Real-time Twitter Stateless Exercise");
         JavaStreamingContext jsc = new JavaStreamingContext(conf, Durations.seconds(20));
         jsc.checkpoint("/tmp/checkpoint");
