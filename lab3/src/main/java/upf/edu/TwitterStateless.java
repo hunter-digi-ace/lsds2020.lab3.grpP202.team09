@@ -41,6 +41,7 @@ public class TwitterStateless {
             System.out.println(data._1() + " " + data._2());
         });
         */
+
         // prepare the output
         final JavaPairDStream<String, Integer> languageRankStream = stream // IMPLEMENT ME
                 .
