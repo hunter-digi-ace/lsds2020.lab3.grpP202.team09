@@ -37,11 +37,17 @@ public class TwitterStateless {
         final JavaPairRDD<String, String> languageMap = LanguageMapUtils
                 .buildLanguageMap(languageMapLines);
 
+        /*languageMap.foreach(data -> {
+            System.out.println(data._1() + " " + data._2());
+        });
+        */
         // prepare the output
-        final JavaPairDStream<String, Integer> languageRankStream = null; // IMPLEMENT ME
+        final JavaPairDStream<String, Integer> languageRankStream = stream // IMPLEMENT ME
+                .
+
 
         // print first 10 results
-        languageRankStream.print();
+        languageRankStream.print(10);
 
         // Start the application and wait for termination signal
         jsc.start();
