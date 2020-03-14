@@ -46,6 +46,7 @@ public class TwitterStateless {
                 .
 
 
+
         // print first 10 results
         languageRankStream.print(10);
 
