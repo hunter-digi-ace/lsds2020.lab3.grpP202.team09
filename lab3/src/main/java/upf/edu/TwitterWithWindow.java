@@ -8,6 +8,7 @@ import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.twitter.TwitterUtils;
+import scala.Tuple2;
 import twitter4j.Status;
 import twitter4j.auth.OAuthAuthorization;
 import upf.edu.util.ConfigUtils;
@@ -15,7 +16,7 @@ import upf.edu.util.LanguageMapUtils;
 
 import java.io.IOException;
 
-public class TwitterWithWindow {
+public class TwitterWithWindow { //este es el 4
     public static void main(String[] args) throws IOException, InterruptedException {
         String propertiesFile = args[0];
         String input = args[1];
@@ -35,17 +36,32 @@ public class TwitterWithWindow {
                 .buildLanguageMap(languageMapLines);
 
         // create an initial stream that counts language within the batch (as in the previous exercise)
-        final JavaPairDStream<String, Integer> languageCountStream = null; // IMPLEMENT ME
+        final JavaPairDStream<String, Integer> languageCountStream = stream // IMPLEMENTED
+                .map(s -> s.getLang())
+                .mapToPair(s -> new Tuple2<>(s, 1))
+                .reduceByKey((a, b) -> a + b);
 
         // Prepare output within the batch
-        final JavaPairDStream<Integer, String> languageBatchByCount = null; // IMPLEMENT ME
+        final JavaPairDStream<Integer, String> languageBatchByCount = stream // IMPLEMENT ME
+                .map(s -> s.getLang())
+                .mapToPair(s -> new Tuple2<>(s, 1))
+                .transformToPair(s -> s.leftOuterJoin(languageMap)
+                        .filter(f -> f._2._2.isPresent())
+                        .mapToPair(d -> new Tuple2<String,Integer>(d._2._2.get(),d._2._1))
+                        .reduceByKey((a, b) -> a + b))
+                .transformToPair(s -> s.mapToPair(d-> d.swap())
+                                                       .sortByKey(false));
 
         // Prepare output within the window
-        final JavaPairDStream<Integer, String> languageWindowByCount = null; // IMPLEMENT ME
+        final JavaPairDStream<Integer, String> languageWindowByCount = languageBatchByCount
+                .transformToPair(s -> s.mapToPair(d-> d.swap()))
+                .reduceByKeyAndWindow((V, C) -> (V+C) ,Durations.minutes(5))
+                .transformToPair(s -> s.mapToPair(d-> d.swap())
+                                                       .sortByKey(false)); // IMPLEMENTED
 
         // Print first 15 results for each one
-        languageBatchByCount.print();
-        languageWindowByCount.print();
+        languageBatchByCount.print(15);
+        languageWindowByCount.print(15);
 
         // Start the application and wait for termination signal
         jsc.start();

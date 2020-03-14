@@ -12,7 +12,7 @@ import upf.edu.util.ConfigUtils;
 
 import java.io.IOException;
 
-public class TwitterWithState {
+public class TwitterWithState { //este es el 5
     public static void main(String[] args) throws IOException, InterruptedException {
         String propertiesFile = args[0];
         String language = args[1];

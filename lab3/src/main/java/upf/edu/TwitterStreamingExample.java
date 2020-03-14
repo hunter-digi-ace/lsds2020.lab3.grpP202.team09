@@ -11,7 +11,7 @@ import upf.edu.util.ConfigUtils;
 
 import java.io.IOException;
  
-public class TwitterStreamingExample {
+public class TwitterStreamingExample { //example
 
     public static void main(String[] args) throws InterruptedException, IOException {
         String propertiesFile = args[0];

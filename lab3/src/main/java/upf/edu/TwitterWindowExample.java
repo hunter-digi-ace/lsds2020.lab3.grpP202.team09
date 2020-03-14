@@ -12,7 +12,7 @@ import upf.edu.util.ConfigUtils;
 
 import java.io.IOException;
 
-public class TwitterWindowExample {
+public class TwitterWindowExample { //example
 
     public static void main(String[] args) throws InterruptedException, IOException {
         String propertiesFile = args[0];
