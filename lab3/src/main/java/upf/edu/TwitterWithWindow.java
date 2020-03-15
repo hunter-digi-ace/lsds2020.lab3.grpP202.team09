@@ -53,11 +53,11 @@ public class TwitterWithWindow { //este es el 4
                                                        .sortByKey(false));
 
         // Prepare output within the window
-        final JavaPairDStream<Integer, String> languageWindowByCount = languageBatchByCount
+        final JavaPairDStream<Integer, String> languageWindowByCount = languageBatchByCount // IMPLEMENTED
                 .transformToPair(s -> s.mapToPair(d-> d.swap()))
                 .reduceByKeyAndWindow((V, C) -> (V+C) ,Durations.minutes(5))
                 .transformToPair(s -> s.mapToPair(d-> d.swap())
-                                                       .sortByKey(false)); // IMPLEMENTED
+                                                       .sortByKey(false));
 
         // Print first 15 results for each one
         languageBatchByCount.print(15);
