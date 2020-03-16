@@ -6,7 +6,9 @@ import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.twitter.TwitterUtils;
 import twitter4j.Status;
+import twitter4j.Twitter;
 import twitter4j.auth.OAuthAuthorization;
+import upf.edu.storage.DynamoHashTagRepository;
 import upf.edu.util.ConfigUtils;
 
 import java.io.IOException;
@@ -25,7 +27,14 @@ public class TwitterHashtags { // este es el 6
         final JavaReceiverInputDStream<Status> stream = TwitterUtils.createStream(jsc, auth);
 
         // <IMPLEMENT ME>
+        DynamoHashTagRepository a = new DynamoHashTagRepository();
 
+        ///aqui falta juntar el stream con algo que llame a
+        ///a.write(stream)
+        //para que cree en la base de datos por cada tweet
+
+
+        stream.print();
         // Start the application and wait for termination signal
         jsc.start();
         jsc.awaitTermination();
