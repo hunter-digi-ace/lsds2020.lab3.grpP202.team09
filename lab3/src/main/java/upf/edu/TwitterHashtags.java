@@ -29,6 +29,8 @@ public class TwitterHashtags { // este es el 6
         // <IMPLEMENT ME>
         DynamoHashTagRepository a = new DynamoHashTagRepository();
 
+        final DynamoHashTagRepository table = new DynamoHashTagRepository();
+        stream.foreachRDD(s->s.foreach(q->table.write(q)));
         ///aqui falta juntar el stream con algo que llame a
         ///a.write(stream)
         //para que cree en la base de datos por cada tweet
