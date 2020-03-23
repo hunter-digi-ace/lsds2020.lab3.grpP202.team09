@@ -27,7 +27,6 @@ public class TwitterHashtags { // este es el 6
         final JavaReceiverInputDStream<Status> stream = TwitterUtils.createStream(jsc, auth);
 
         // <IMPLEMENT ME>
-        DynamoHashTagRepository a = new DynamoHashTagRepository();
 
         final DynamoHashTagRepository table = new DynamoHashTagRepository();
         stream.foreachRDD(s->s.foreach(q->table.write(q)));

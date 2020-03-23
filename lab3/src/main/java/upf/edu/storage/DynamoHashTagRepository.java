@@ -23,20 +23,10 @@ public class DynamoHashTagRepository implements IHashtagRepository, Serializable
 
 
   @Override
-  public void write(Status tweet) { // IMPLEMENT ME
-    /*
-    String hashtag = tweet.getText();//hacer un for por palabra con hastag
-    String lang = tweet.getLang();
-    Long id = tweet.getId();
-    List<Long> list = new ArrayList<Long>();
-    list.add(5L);
-    //Item item = new Item().withPrimaryKey("hashtag", hashtag , "counter", 1)
-    //                      .withString("language", lang).withList("ids", list);
-    Map<String, AttributeValue> item = new HashMap<>();
-    item.put("hashtag", new AttributeValue().withS("#hashtag"));
-    item.put("counter", new AttributeValue().withN("1"));
-    item.put("languaje", new AttributeValue().withS("es"));
-*/
+  public void write(Status h) { // IMPLEMENT ME
+
+
+
     final  String endpoint = "dynamodb.us-east-1.amazonaws.com";
     final  String region = "us-east-1";
     final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
@@ -48,17 +38,30 @@ public class DynamoHashTagRepository implements IHashtagRepository, Serializable
     final Table dynamoDBTable = dynamoDB.getTable("LSDS2020-TwitterHashtags");
 
     ///////////////////////////////ejemplo de prueba, esto deberia crear algo en la base de datos
+    /*
+    String hashtag = h.getText();//hacer un for por palabra con hastag
+    String lang = h.getLang();
+    Long id = h.getId();
+    List<Long> list = new ArrayList<Long>();
+    list.add(5L);
+    //Item item = new Item().withPrimaryKey("hashtag", hashtag , "counter", 1)
+    //                      .withString("language", lang).withList("ids", list);
+    Map<String, AttributeValue> item = new HashMap<>();
+    item.put("hashtag", new AttributeValue().withS("#hashtag"));
+    item.put("counter", new AttributeValue().withN("1"));
+    item.put("languaje", new AttributeValue().withS("es"));
+    */
+
+
+
     int year = 2015;
     String title = "The Big New Movie";
 
-    final Map<String, Object> infoMap = new HashMap<String, Object>();
-    infoMap.put("plot", "Nothing happens at all.");
-    infoMap.put("rating", 0);
 
     try {
       System.out.println("Adding a new item...");
       PutItemOutcome outcome = dynamoDBTable
-              .putItem(new Item().withPrimaryKey("year", year, "title", title).withMap("info", infoMap));
+              .putItem(new Item().withPrimaryKey("hashtag", "hola").withInt("count",0));
 
       System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
 
