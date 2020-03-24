@@ -9,13 +9,13 @@ _Members: Marçal Moner NIA 183749 Ivan Martinez NIA 206638 Daniel Gonzalez NIA 
 **2 Running example application locally**
 - Runs with this comand:
 ```
-spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterStreamingExample lab3-1.0-SNAPSHOT.jar ./src/main/resources/application.properties
+spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterStreamingExample ./target/lab3-1.0-SNAPSHOT.jar ./src/main/resources/application.properties
 ```
 
 **3 Stateless: joining a static RDD with a real time stream**
 - Runs with this comand:
 ```
-spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterStateless lab3-1.0-SNAPSHOT.jar ./src/main/resources/application.properties ./src/main/resources/map.tsv
+spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterStateless ./target/lab3-1.0-SNAPSHOT.jar ./src/main/resources/application.properties ./src/main/resources/map.tsv
 ```
 **4 Spark Stateful transformations with windows**
 - Runs with this comand:
