@@ -35,7 +35,7 @@ public class TwitterHashtags { // este es el 6
         //para que cree en la base de datos por cada tweet
 
 
-        stream.print();
+        //stream.print();
         // Start the application and wait for termination signal
         jsc.start();
         jsc.awaitTermination();
