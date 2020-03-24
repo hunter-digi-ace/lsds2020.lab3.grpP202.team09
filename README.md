@@ -36,10 +36,12 @@ spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$
 - Runs with this comand:
 
 ```
-spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterHashtags ./target/lab3-1.0-SNAPSHOT.jar ./src/main
-/resources/application.properties
+spark-submit --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file://$PWD/src/main/resources/log4j.properties --class upf.edu.TwitterHashtags ./target/lab3-1.0-SNAPSHOT.jar ./src/main/resources/application.properties
 ```
 
 **6.2 Reading from DynamoDB**
 - Runs with this comand:
+```
+none
+```
 
