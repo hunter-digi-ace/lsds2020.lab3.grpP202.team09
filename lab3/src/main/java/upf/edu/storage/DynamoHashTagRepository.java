@@ -31,19 +31,13 @@ public class DynamoHashTagRepository implements IHashtagRepository, Serializable
   @Override
   public void write(Status h) { // IMPLEMENT ME
 
-    BasicSessionCredentials awsCredentials = new BasicSessionCredentials(
-            "",
-            "",
-            ""
-    );
-
 
     final  String endpoint = "dynamodb.us-east-1.amazonaws.com";
     final  String region = "us-east-1";
     final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
             .withEndpointConfiguration(
                     new AwsClientBuilder.EndpointConfiguration(endpoint, region)
-            ).withCredentials(new AWSStaticCredentialsProvider(awsCredentials)) /////////////actualizar vuestros datos de aws con nombre upf, no default
+            ).withCredentials(new ProfileCredentialsProvider("upf")) /////////////actualizar vuestros datos de aws con nombre upf, no default
             .build();
     final DynamoDB dynamoDB = new DynamoDB(client);
     final Table dynamoDBTable = dynamoDB.getTable("LSDS2020-TwitterHashtags");
